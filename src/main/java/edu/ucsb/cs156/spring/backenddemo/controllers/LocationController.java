@@ -18,7 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 
 
-@Tag(name="Locations from https://nominatim.openstreetmap.org")
+@Tag(name="Location info from nominatim.org")
 @RestController
 @RequestMapping("/api/locations")
 public class LocationController {
