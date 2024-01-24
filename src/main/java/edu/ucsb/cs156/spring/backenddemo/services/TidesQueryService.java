@@ -45,6 +45,6 @@ public class TidesQueryService {
 
         ResponseEntity<String> re = restTemplate.exchange(ENDPOINT, HttpMethod.GET, entity, String.class,
                 uriVariables);
-        return "";
+        return re.getBody();
     }
 }
