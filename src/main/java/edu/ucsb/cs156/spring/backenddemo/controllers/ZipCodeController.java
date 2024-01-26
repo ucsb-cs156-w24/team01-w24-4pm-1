@@ -35,7 +35,7 @@ public class ZipCodeController {
         @Parameter(name="zipcode", example="93117") @RequestParam String zipcode
     ) throws JsonProcessingException {
         log.info("getZipCodes: zipcode={}", zipcode);
-        String result = zipcodeCodeQueryService.getJSON(zipcode);
+        String result = zipCodeQueryService.getJSON(zipcode);
         return ResponseEntity.ok().body(result);
     }
 
