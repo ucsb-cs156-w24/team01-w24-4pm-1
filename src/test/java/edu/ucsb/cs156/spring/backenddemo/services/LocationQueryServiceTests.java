@@ -19,13 +19,13 @@ public class LocationQueryServiceTests {
     private MockRestServiceServer mockRestServiceServer;
 
     @Autowired
-    private LocationQueryService locationQueryService;
+    private LocationQueryService LocationQueryService;
 
     @Test
     public void test_getJSON() {
 
-        String location = "Sacramento";
-        String expectedURL = locationQueryService.ENDPOINT.replace("{location}", location);
+        String location = "Denver";
+        String expectedURL = LocationQueryService.ENDPOINT.replace("{location}", location);
 
         String fakeJsonResult = "{ \"fake\" : \"result\" }";
 
@@ -34,7 +34,7 @@ public class LocationQueryServiceTests {
                 .andExpect(header("Content-Type", MediaType.APPLICATION_JSON.toString()))
                 .andRespond(withSuccess(fakeJsonResult, MediaType.APPLICATION_JSON));
 
-        String actualResult = locationQueryService.getJSON(location);
+        String actualResult = LocationQueryService.getJSON(location);
         assertEquals(fakeJsonResult, actualResult);
     }
 }

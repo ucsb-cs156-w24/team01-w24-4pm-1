@@ -42,7 +42,7 @@ public class LocationControllerTests {
   public void test_getLocation() throws Exception {
   
     String fakeJsonResult="{ \"fake\" : \"result\" }";
-    String location = "sacramento";
+    String location = "Denver";
     when(mockLocationQueryService.getJSON(eq(location))).thenReturn(fakeJsonResult);
 
     String url = String.format("/api/locations/get?location=%s",location);
