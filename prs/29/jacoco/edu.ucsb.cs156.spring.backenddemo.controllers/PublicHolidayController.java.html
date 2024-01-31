@@ -33,7 +33,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
         @Parameter(name=&quot;countryCode&quot;, description=&quot;country code&quot;, example=&quot;US&quot;) @RequestParam String countryCode,
         @Parameter(name=&quot;year&quot;, description=&quot;year&quot;, example=&quot;2011&quot;) @RequestParam String year
     ) throws JsonProcessingException {
-<span class="fc" id="L36">        String result = publicHolidayQueryService.getJSON(countryCode, year);</span>
+<span class="fc" id="L36">        String result = publicHolidayQueryService.getJSON(year, countryCode);</span>
 <span class="fc" id="L37">        return ResponseEntity.ok().body(result);</span>
     }
 
