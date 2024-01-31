@@ -23,7 +23,7 @@ public class PublicHolidayQueryServiceTests {
     @Test
     public void test_getJSON() {
         String year = "2011";
-        String countryCode = "U.S.A.";
+        String countryCode = "001";
 
         String expectedURL = PublicHolidayQueryService.ENDPOINT.replace("{year}", year).replace("{countryCode}", countryCode);
 
