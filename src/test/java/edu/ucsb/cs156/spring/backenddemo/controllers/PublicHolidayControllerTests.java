@@ -30,11 +30,11 @@ public class PublicHolidayControllerTests {
   public void test_getPublicHolidays() throws Exception {
   
     String fakeJsonResult="{ \"fake\" : \"result\" }";
+    String countryCode = "US";
     String year = "2011";
-    String countryCode = "001";
-    when(mockPublicHolidayQueryService.getJSON(eq(year),eq(countryCode))).thenReturn(fakeJsonResult);
+    when(mockPublicHolidayQueryService.getJSON(eq(countryCode),eq(year))).thenReturn(fakeJsonResult);
 
-    String url = String.format("/api/publicholidays/get?year=%s&countryCode=%s", year, countryCode);
+    String url = String.format("/api/publicholidays/get?countryCode=%s&year=%s", countryCode, year);
 
     MvcResult response = mockMvc
         .perform(get(url).contentType("application/json"))

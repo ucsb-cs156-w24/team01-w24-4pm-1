@@ -30,7 +30,7 @@ public class PublicHolidayController {
     @Operation(summary = "Get a list of public holidays")
     @GetMapping("/get")
     public ResponseEntity<String> getPublicHolidays(
-        @Parameter(name="countryCode", description="country code", example="001") @RequestParam String countryCode,
+        @Parameter(name="countryCode", description="country code", example="US") @RequestParam String countryCode,
         @Parameter(name="year", description="year", example="2011") @RequestParam String year
     ) throws JsonProcessingException {
         String result = publicHolidayQueryService.getJSON(countryCode, year);
