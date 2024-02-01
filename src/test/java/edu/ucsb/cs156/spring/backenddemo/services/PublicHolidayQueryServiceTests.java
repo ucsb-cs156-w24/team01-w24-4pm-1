@@ -1,46 +1,40 @@
 package edu.ucsb.cs156.spring.backenddemo.services;
 
-import org.springframework.web.client.RestTemplate;
-
-import lombok.extern.slf4j.Slf4j;
-
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.test.web.client.MockRestServiceServer;
 
-@Slf4j
-@Service
-public class PublicHolidayQueryService {
+import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.header;
 
-    private final RestTemplate restTemplate;
+@RestClientTest(PublicHolidayQueryService.class)
+public class PublicHolidayQueryServiceTests {
+    @Autowired
+    private MockRestServiceServer mockRestServiceServer;
 
-    public PublicHolidayQueryService(RestTemplateBuilder restTemplateBuilder) {
-        restTemplate = restTemplateBuilder.build();
-    }
+    @Autowired
+    private PublicHolidayQueryService publicHolidayQueryService;
 
-    public static final String ENDPOINT = "https://date.nager.at/api/v2/publicholidays/{year}/{countryCode}";
+    @Test
+    public void test_getJSON() {
+        String year = "2011";
+        String countryCode = "US";
 
-    public String getJSON(String year, String countryCode) throws HttpClientErrorException {
-        log.info("year={}, countryCode={}", year, countryCode);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        String expectedURL = PublicHolidayQueryService.ENDPOINT.replace("{year}", year).replace("{countryCode}", countryCode);
 
-        HttpEntity<String> entity = new HttpEntity<>(headers);
+        String fakeJsonResult = "{ \"fake\" : \"result\" }";
 
-        Map<String, String> uriVariables = Map.of("year", year, "countryCode", countryCode);
+        this.mockRestServiceServer.expect(requestTo(expectedURL))
+                .andExpect(header("Accept", MediaType.APPLICATION_JSON.toString()))
+                .andExpect(header("Content-Type", MediaType.APPLICATION_JSON.toString()))
+                .andRespond(withSuccess(fakeJsonResult, MediaType.APPLICATION_JSON));
 
-        ResponseEntity<String> re = restTemplate.exchange(ENDPOINT, HttpMethod.GET, entity, String.class,
-                uriVariables);
-        return re.getBody();
+        String actualResult = publicHolidayQueryService.getJSON(year, countryCode);
+        assertEquals(fakeJsonResult, actualResult);
     }
 }
