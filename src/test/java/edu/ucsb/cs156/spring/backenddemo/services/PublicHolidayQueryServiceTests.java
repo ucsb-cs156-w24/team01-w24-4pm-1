@@ -22,10 +22,10 @@ public class PublicHolidayQueryServiceTests {
 
     @Test
     public void test_getJSON() {
-        String countryCode = "US, MX";
         String year = "2011";
+        String countryCode = "US";
 
-        String expectedURL = PublicHolidayQueryService.ENDPOINT.replace("{countryCode}", countryCode).replace("{year}", year);
+        String expectedURL = PublicHolidayQueryService.ENDPOINT.replace("{year}", year).replace("{countryCode}", countryCode);
 
         String fakeJsonResult = "{ \"fake\" : \"result\" }";
 
@@ -34,7 +34,7 @@ public class PublicHolidayQueryServiceTests {
                 .andExpect(header("Content-Type", MediaType.APPLICATION_JSON.toString()))
                 .andRespond(withSuccess(fakeJsonResult, MediaType.APPLICATION_JSON));
 
-        String actualResult = publicHolidayQueryService.getJSON(countryCode, year);
+        String actualResult = publicHolidayQueryService.getJSON(year, countryCode);
         assertEquals(fakeJsonResult, actualResult);
     }
 }
