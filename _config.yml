@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-w24/team01-w24-4pm-1
 owner: ucsb-cs156-w24
 repo_name: team01-w24-4pm-1
-pull_requests: [{"author":{"id":"MDQ6VXNlcjkxMjg3MTQw","is_bot":false,"login":"jtanggy","name":"Likhit Gudisay"},"headRefName":"jtanggy-patch-1","number":38,"title":"Update HomeControllerTests.java","url":"https://github.com/ucsb-cs156-w24/team01-w24-4pm-1/pull/38"}]
+pull_requests: []
