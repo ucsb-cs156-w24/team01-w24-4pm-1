@@ -6,7 +6,7 @@ Lab instructions: <https://ucsb-cs156.github.io/w24/lab/team01.html>
 ```
 |   Name    |    GitHub Id      |  Service                    | Controller                |
 |-----------|-------------------|-----------------------------|---------------------------|
-|  Likhit   |      jtanggy      | `LocationQueryService`      | `LocationController`      |
+|  Likhit   |    jtanggy        | `LocationQueryService`      | `LocationController`      |
 |  Chris    |   chrisriney4     | `PublicHolidayQueryService` | `PublicHolidayController` |
 |  Alex     |alexanderthomasucsb| `TidesQueryService`         | `TidesController`         |
 |  Tyler    | TianyiYang-Tyler  | `UniversityQueryService`    | `UniversityController`    |
